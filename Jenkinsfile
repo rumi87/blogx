@@ -7,6 +7,7 @@ pipeline {
     stage('Prepare .env-commit') {
       steps {
         sh 'echo GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT) > .env-commit'
+        sh "sed -i 's/IMAGE_TAG/${GIT_COMMIT_SHORT}/g' docker-compose.yml"
       }
     }
     stage('Build') { 
