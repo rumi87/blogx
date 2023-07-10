@@ -18,16 +18,10 @@ pipeline {
     stage('Deploy to remote server') {
       steps {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'Server-Blogx', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''export GIT_COMMIT_SHORT=$(echo $GIT_COMMIT | head -c 7)
-
         echo "GIT_COMMIT_SHORT=$(echo $GIT_COMMIT_SHORT)" > .env
-
         docker-compose pull
-    
         docker-compose up -d --remove-orphans
-
-        docker image prune
-
-        ''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+        docker image prune''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'docker-compose.yml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
       }
     }
   }
