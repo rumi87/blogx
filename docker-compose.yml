@@ -1,7 +1,7 @@
 version: '3'
 services:
     laravel.blogx:
-        image: rumi87/blogx:${GIT_COMMIT_SHORT}
+        image: rumi87/blogx:IMAGE_TAG
         ports:
             - 8000:8000
         env_file: .env.example
